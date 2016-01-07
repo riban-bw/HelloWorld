@@ -12,13 +12,13 @@ rm -rf ${HTML_PATH}
 mkdir -p ${HTML_PATH}
 git clone -b gh-pages "${REPO_PATH}" --single-branch ${HTML_PATH}
 
+# Create and commit the documentation repo.
+cd ${HTML_PATH}
+
 # Check if this revision has already been documented by another (matrix) build
 git log --grep $CHANGESET && exit 0
 
-echo "<html><head><title>Test page</title></head><body>1. This is build $CHANGESET.</body></html>" > $HTML_PATH/index.html
-
-# Create and commit the documentation repo.
-cd ${HTML_PATH}
+echo "<html><head><title>Test page</title></head><body>1. This is build $CHANGESET.</body></html>" > index.html
 echo "<html><body>Version $VERSION</body><html>" > "$VERSION.html"
 git add .
 git config user.name "${COMMIT_USER}"
