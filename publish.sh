@@ -22,6 +22,7 @@ git clone -b gh-pages "${REPO_PATH}" --single-branch ${HTML_PATH}
 # Create and commit the documentation repo.
 cd ${HTML_PATH}
 
+touch $TRAVIS_JOB_NUMBER
 echo "<html><head><title>Test page</title></head><body>1. This is build $CHANGESET.</body></html>" > index.html
 echo "<html><body>Version $VERSION</body><html>" > "$VERSION.html"
 git add .
