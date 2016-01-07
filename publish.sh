@@ -12,7 +12,7 @@ rm -rf ${HTML_PATH}
 mkdir -p ${HTML_PATH}
 git clone -b gh-pages "${REPO_PATH}" --single-branch ${HTML_PATH}
 
-echo "<html><head><title>Test page</title></head><body>This is build $CHANGESET.</body></html>" > $HTML_PATH/index.html
+echo "<html><head><title>Test page</title></head><body>1. This is build $CHANGESET.</body></html>" > $HTML_PATH/index.html
 
 # Create and commit the documentation repo.
 cd ${HTML_PATH}

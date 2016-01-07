@@ -13,10 +13,10 @@ addons:
 install: 
 script:
 - make hello
-- ./publish.sh
 before_install:
 - openssl aes-256-cbc -K $encrypted_3b52e9352b1f_key -iv $encrypted_3b52e9352b1f_iv
   -in travisci_rsa.enc -out travisci_rsa -d
 - chmod 0600 travisci_rsa
 - cp -v travisci_rsa ~/.ssh/id_rsa
 after_sucess: 
+- ./publish.sh
