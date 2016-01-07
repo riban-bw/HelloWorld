@@ -3,6 +3,9 @@ language: c
 os:
 - linux
 env: 
+  matrix:
+  - VERSION=1
+  - VERSION=2
 addons:
   apt:
     sources:
