@@ -13,7 +13,7 @@ mkdir -p ${HTML_PATH}
 git clone -b gh-pages "${REPO_PATH}" --single-branch ${HTML_PATH}
 
 # Check if this revision has already been documented by another (matrix) build
-git log --grep $CHANGESET || exit 0
+git log --grep $CHANGESET && exit 0
 
 echo "<html><head><title>Test page</title></head><body>1. This is build $CHANGESET.</body></html>" > $HTML_PATH/index.html
 
