@@ -1,0 +1,22 @@
+sudo: false
+language: c
+os:
+- linux
+env:
+  global:
+  - SDK_BUILD=258
+  matrix:
+  - SDK_VERSION=1.4.0
+  - SDK_VERSION=1.5.0
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - bsdtar
+    - doxygen
+install:
+script:
+- make hello
+before_install:
+after_sucess: 
