@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 # Only run on first Travis-ci job to avoid running for each platform / version
-JOB="${$TRAVIS_JOB_NUMBER: -1}"
+JOB="${TRAVIS_JOB_NUMBER: -1}"
 if [ "$JOB.0" != "1.0" ]
 then
   return 0
