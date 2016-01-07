@@ -2,7 +2,10 @@
 
 # Only run on first Travis-ci job to avoid running for each platform / version
 JOB="${$TRAVIS_JOB_NUMBER: -1}"
-[ "$JOB.0" != "1.0" ] && return 0
+if [ "$JOB.0" != "1.0" ]
+then
+  return 0
+fi
 
 # Settings
 REPO_PATH=git@github.com:riban-bw/HelloWorld.git
