@@ -16,7 +16,10 @@ git clone -b gh-pages "${REPO_PATH}" --single-branch ${HTML_PATH}
 cd ${HTML_PATH}
 
 # Check if this revision has already been documented by another (matrix) build
-git log --grep "$CHANGESET" && exit 0
+echo "Checking for $CHANGESET in previous commit messages"
+COMMIT_MSG="Automated API documentation build for changeset ${CHANGESET}."
+LAST_MSG=`git log -n 1`
+[ "$COMMIT_MSG" = "$LAST_MSG" ] && exit 0
 
 echo "<html><head><title>Test page</title></head><body>1. This is build $CHANGESET.</body></html>" > index.html
 echo "<html><body>Version $VERSION</body><html>" > "$VERSION.html"
