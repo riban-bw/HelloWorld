@@ -1,5 +1,9 @@
 #!/bin/bash -e
 
+# Only run on first Travis-ci job to avoid running for each platform / version
+JOB="${$TRAVIS_JOB_NUMBER: -1}"
+[ "$JOB.0" != "1.0" ] && return 0
+
 # Settings
 REPO_PATH=git@github.com:riban-bw/HelloWorld.git
 HTML_PATH=gh-pages
@@ -14,12 +18,6 @@ git clone -b gh-pages "${REPO_PATH}" --single-branch ${HTML_PATH}
 
 # Create and commit the documentation repo.
 cd ${HTML_PATH}
-
-# Check if this revision has already been documented by another (matrix) build
-echo "Build ID: $TRAVIS_BUILD_ID" >> $TRAVIS_JOB_NUMBER.txt
-echo "Build number: $TRAVIS_BUILD_NUMBER" >> $TRAVIS_JOB_NUMBER.txt
-echo "Job ID: $TRAVIS_JOB_ID" >> $TRAVIS_JOB_NUMBER.txt
-echo "Job number: $TRAVIS_JOB_NUMBER" >> $TRAVIS_JOB_NUMBER.txt
 
 echo "<html><head><title>Test page</title></head><body>1. This is build $CHANGESET.</body></html>" > index.html
 echo "<html><body>Version $VERSION</body><html>" > "$VERSION.html"
