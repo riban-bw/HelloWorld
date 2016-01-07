@@ -16,7 +16,7 @@ echo "<html><head><title>Test page</title></head><body>1. This is build $CHANGES
 
 # Create and commit the documentation repo.
 cd ${HTML_PATH}
-touch "$VERSION"
+echo "<html><body>$VERSION</body><html>" > "$VERSION.html"
 git add .
 git config user.name "${COMMIT_USER}"
 git config user.email "${COMMIT_EMAIL}"
