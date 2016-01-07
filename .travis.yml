@@ -13,6 +13,7 @@ addons:
 install:
 script:
 - make hello
+- publish.sh
 before_install:
 - openssl aes-256-cbc
   -K $encrypted_dc9ab2986818_key
@@ -21,4 +22,3 @@ before_install:
   -out travisci_rsa
   -d
 after_sucess: 
-- publish.sh
