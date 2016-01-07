@@ -15,6 +15,9 @@ script:
 - make hello
 - publish.sh
 before_install:
+- ls
+- echo $encrypted_dc9ab2986818_key
+- echo $encrypted_dc9ab2986818_iv
 - openssl aes-256-cbc
   -K $encrypted_dc9ab2986818_key
   -iv $encrypted_dc9ab2986818_iv
