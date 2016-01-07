@@ -18,8 +18,4 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_3b52e9352b1f_key -iv $encrypted_3b52e9352b1f_iv
   -in travisci_rsa.enc -out travisci_rsa -d
 - ls
-- echo $encrypted_dc9ab2986818_key
-- echo $encrypted_dc9ab2986818_iv
-- openssl aes-256-cbc -K $encrypted_dc9ab2986818_key -iv $encrypted_dc9ab2986818_iv
-  -in  travisci_rsa.enc -out travisci_rsa -d
 after_sucess: 
