@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 # Settings
-REPO_PATH=https://github.com/riban-bw/HelloWorld.git
+REPO_PATH=git@github.com:riban-bw/HelloWorld.git
 HTML_PATH=gh-pages
 COMMIT_USER="riban-bw"
 COMMIT_EMAIL="brian@riban.co.uk"
