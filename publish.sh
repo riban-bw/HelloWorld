@@ -27,7 +27,7 @@ doxygen >doxygen.log 2>error.log
 
 ls
 echo "doxygen complete"
-#NOT_DOCED=`grep "is not documented" error.log | wc -l`
+NOT_DOCED=`grep "is not documented" error.log | wc -l`
 #NOT_DOC_MEMBER=`grep "Member.*is not documented" error.log | wc -l`
 #NOT_DOC_PARAM=`grep "The following parameters of .* are not documented" | wc -l`
 echo "Getting undocumented parameters"
