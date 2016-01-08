@@ -29,7 +29,7 @@ ls
 echo "doxygen complete"
 NOT_DOCED=`grep "is not documented" error.log | wc -l`
 NOT_DOC_MEMBER=`grep "Member.*is not documented" error.log | wc -l`
-#NOT_DOC_PARAM=`grep "The following parameters of .* are not documented" | wc -l`
+NOT_DOC_PARAM=`grep "The following parameters of .* are not documented" | wc -l`
 echo "Getting undocumented parameters"
 #DOC_PARAM=`grep "The following parameters of .* are not documented" doxyerror.log | awk --field-separator " of " '{ print $2 }' | awk --field-separator " are not documented" '{ print $1"<br/>" }'`
 echo "Getting incorrect arguments"
