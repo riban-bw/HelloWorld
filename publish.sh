@@ -38,7 +38,7 @@ DOC_ERROR=`grep "is not found in the argument list" error.log` || DOC_ERROR="Non
 echo "Getting unsuppported tags"
 DOC_UNSUPPORTED=`grep "Unsupported xml/html tag" error.log` || DOC_UNSUPPORTED="None"
 echo "Creating report"
-echo "<html><body>There are $NOT_DOCED elements not yet documented<br/><br/>There are $NOT_DOC_MEMBER undocumented member elements.<br/>Thefollowing functions have undocumented parameters:<br/>$DOC_PARAM</br>The following errors in dcumentation require fixing:<br/>$DOC_ERROR<br/><br/>$DOC_UNSUPPORTED</body></html>" > "${HTML_PATH}/api/report.html"
+echo "<html><body>There are $NOT_DOCED elements not yet documented<br/><br/>There are $NOT_DOC_MEMBER undocumented member elements.<br/>The following functions have undocumented parameters:<br/>$DOC_PARAM</br>The following errors in documentation require fixing:<br/>$DOC_ERROR<br/>The following syntax erros require fixing:<br/>$DOC_UNSUPPORTED</body></html>" > "${HTML_PATH}/api/report.html"
 echo "Commit API documentation to gh-pages branch"
 # Create and commit the documentation repo.
 cd ${HTML_PATH}
