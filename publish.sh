@@ -34,7 +34,7 @@ DOC_PARAM=`grep "The following parameters of .* are not documented" error.log | 
 DOC_ERROR=`grep "is not found in the argument list" error.log | sed "s|$BUILD_PATH/||" | sed 's/</\&lt\;/g' | sed 's/>/\&gt\;/g' | sed 's/^/<li>/' | sed 's/$/<\/li>/'` || DOC_ERROR="None"
 DOC_UNSUPPORTED=`grep "Unsupported xml/html tag" error.log | sed "s|$BUILD_PATH/||" | sed 's/</\&lt\;/g' | sed 's/>/\&gt\;/g' | sed 's/^/<li>/' | sed 's/$/<\/li>/'` || DOC_UNSUPPORTED="None"
 echo "Creating report"
-echo "<html><body><p>There are $NOT_DOCED undocumented elements of which $NOT_DOC_MEMBER are class (or group) member elements.</p><p>The following functions parameters are undocumented:</p><ul>$DOC_PARAM</ul><p>The following errors in documentation require fixing:</p><ul>$DOC_ERROR</ul><p>The following syntax errors require fixing:</p><ul>$DOC_UNSUPPORTED</ul></body></html>" > "${HTML_PATH}/api/report.html"
+echo "<html><body><p>There are $NOT_DOCED undocumented elements of which $NOT_DOC_MEMBER are class (or group) member elements.</p><p>The following functions have undocumented parameters (only functions that have some documentation):</p><ul>$DOC_PARAM</ul><p>The following errors in documentation require fixing:</p><ul>$DOC_ERROR</ul><p>The following syntax errors require fixing:</p><ul>$DOC_UNSUPPORTED</ul></body></html>" > "${HTML_PATH}/api/report.html"
 echo "Commit API documentation to gh-pages branch"
 # Create and commit the documentation repo.
 cd ${HTML_PATH}
