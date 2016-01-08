@@ -30,10 +30,10 @@ NOT_DOCED=`grep "is not documented" error.log | wc -l`
 NOT_DOC_MEMBER=`grep "Member.*is not documented" error.log | wc -l`
 NOT_DOC_PARAM=`grep "The following parameters of .* are not documented" error.log | wc -l`
 DOC_PARAM=`grep "The following parameters of .* are not documented" error.log | awk -F" of " '{ print $2 }' | awk -F" are not documented" '{ print "<li>"$1"</li>" }'` || DOC_PARAM="None"
-DOC_ERROR=`grep "is not found in the argument list" error.log | awk -F":" '{ print "<li>"$4"</li>" }'` || DOC_ERROR="None"
+DOC_ERROR=`grep "is not found in the argument list" error.log | awk -F"/.*/" '{ print $2 }' | awk -F":" '{ print "<li>"$4 in file %1"</li>" }'` || DOC_ERROR="None"
 DOC_UNSUPPORTED=`grep "Unsupported xml/html tag" error.log | sed 's/</\&lt\;/g' | sed 's/>/\&gt\;/g' | awk -F":" '{ print "<li>"$4"</li>" }'` || DOC_UNSUPPORTED="None"
 echo "Creating report"
-echo "<html><body><p>There are $NOT_DOCED elements not yet documented of which $NOT_DOC_MEMBER are class (or group) member elements.</p><p>The following functions parameters are undocumented:</p><ul>$DOC_PARAM</ul><p>The following errors in documentation require fixing:</p><ul>$DOC_ERROR</ul><p>The following syntax errors require fixing:</p><ul>$DOC_UNSUPPORTED</ul></body></html>" > "${HTML_PATH}/api/report.html"
+echo "<html><body><p>There are $NOT_DOCED undocumented elements of which $NOT_DOC_MEMBER are class (or group) member elements.</p><p>The following functions parameters are undocumented:</p><ul>$DOC_PARAM</ul><p>The following errors in documentation require fixing:</p><ul>$DOC_ERROR</ul><p>The following syntax errors require fixing:</p><ul>$DOC_UNSUPPORTED</ul></body></html>" > "${HTML_PATH}/api/report.html"
 echo "Commit API documentation to gh-pages branch"
 # Create and commit the documentation repo.
 cd ${HTML_PATH}
