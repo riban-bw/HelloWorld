@@ -1,11 +1,9 @@
 #!/bin/bash -e
 
 # Only run on first Travis-ci job to avoid running for each platform / version
-#JOB="${TRAVIS_JOB_NUMBER: -1}"
-#if [ "$JOB.0" != "1.0" ]
 if [ "${TRAVIS_JOB_NUMBER: -1}" != "1" ]
 then
-  return 0
+  exit 0
 fi
 
 # Settings
@@ -20,15 +18,30 @@ rm -rf ${HTML_PATH}
 mkdir -p ${HTML_PATH}
 git clone -b gh-pages "${REPO_PATH}" --single-branch ${HTML_PATH}
 
+# rm all the files through git to prevent stale files.
+git rm -rf --ignore-unmatch ${HTML_PATH}/api
+
+# Generate the HTML documentation.
+echo "Starting doxygen..."
+doxygen >doxygen.log 2>error.log
+echo "doxygen complete"
+NOT_DOCED=`grep "is not documented" error.log | wc -l`
+NOT_DOC_MEMBER=`grep "Member.*is not documented" error.log | wc -l`
+NOT_DOC_PARAM=`grep "The following parameters of .* are not documented" | wc -l`
+echo "Getting undocumented parameters"
+DOC_PARAM=`grep "The following parameters of .* are not documented" doxyerror.log | awk --field-separator " of " '{ print $2 }' | awk --field-separator " are not documented" '{ print $1"<br/>" }'`
+echo "Getting incorrect arguments"
+DOC_ERROR=`grep "is not found in the argument list" error.log`
+echo "Getting unsuppported tags"
+DOC_UNSUPPORTED=`grep "Unsupported xml/html tag"`
+
+echo "<html><body>There are $NOT_DOCED elements not yet documented<br/><br/>There are $NOT_DOC_MEMBER undocumented member elements.<br/>Thefollowing functions have undocumented parameters:<br/>$DOC_PARAM</br>The following errors in dcumentation require fixing:<br/>$DOC_ERROR<br/><br/>$DOC_UNSUPPORTED</body></html>" > ${HTML_PATH}/api/report.html
+
 # Create and commit the documentation repo.
 cd ${HTML_PATH}
-
-touch $TRAVIS_JOB_NUMBER
-echo "<html><head><title>Test page</title></head><body>1. This is build $CHANGESET.</body></html>" > index.html
-echo "<html><body>Version $VERSION</body><html>" > "$VERSION.html"
 git add .
 git config user.name "${COMMIT_USER}"
 git config user.email "${COMMIT_EMAIL}"
-git commit -m "Automated API documentation build for changeset ${CHANGESET}."
-git push origin gh-pages
+# Only push if commit succeeds. This avoids script failing because nothing to commit
+git commit -m "Automated API documentation build for changeset ${CHANGESET}." && git push origin gh-pages
 cd -
