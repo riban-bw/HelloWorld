@@ -10,7 +10,7 @@ fi
 # Settings
 REPO_PATH=git@github.com:riban-bw/HelloWorld.git
 HTML_PATH=gh-pages
-BUILD_PATH={TRAVIS_BUILD_DIR}
+BUILD_PATH="${TRAVIS_BUILD_DIR}"
 COMMIT_USER="riban-bw"
 COMMIT_EMAIL="brian@riban.co.uk"
 CHANGESET=$(git rev-parse --verify HEAD)
