@@ -25,20 +25,15 @@ git rm -rf --ignore-unmatch ${HTML_PATH}/api
 # Generate the HTML documentation.
 echo "Starting doxygen..."
 doxygen >doxygen.log 2>error.log
-
-ls
 echo "doxygen complete"
 NOT_DOCED=`grep "is not documented" error.log | wc -l`
 NOT_DOC_MEMBER=`grep "Member.*is not documented" error.log | wc -l`
 NOT_DOC_PARAM=`grep "The following parameters of .* are not documented" error.log | wc -l`
-echo "Getting undocumented parameters"
-DOC_PARAM=`grep "The following parameters of .* are not documented" error.log | awk --field-separator " of " '{ print $2 }' | awk --field-separator " are not documented" '{ print $1"<br/>" }'` || DOC_PARAM="None"
-echo "Getting incorrect arguments"
+DOC_PARAM=`grep "The following parameters of .* are not documented" error.log | awk --field-separator " of " '{ print $2 }' | awk --field-separator " are not documented" '{ print "<li>"$1"</li>" }'` || DOC_PARAM="None"
 DOC_ERROR=`grep "is not found in the argument list" error.log` || DOC_ERROR="None"
-echo "Getting unsuppported tags"
 DOC_UNSUPPORTED=`grep "Unsupported xml/html tag" error.log` || DOC_UNSUPPORTED="None"
 echo "Creating report"
-echo "<html><body>There are $NOT_DOCED elements not yet documented<br/><br/>There are $NOT_DOC_MEMBER undocumented member elements.<br/>The following functions have undocumented parameters:<br/>$DOC_PARAM</br>The following errors in documentation require fixing:<br/>$DOC_ERROR<br/>The following syntax erros require fixing:<br/>$DOC_UNSUPPORTED</body></html>" > "${HTML_PATH}/api/report.html"
+echo "<html><body><p>There are $NOT_DOCED elements not yet documented</p><p>There are $NOT_DOC_MEMBER undocumented member elements.</p><p<The following functions have undocumented parameters:</p><ul>$DOC_PARAM</ul><p>The following errors in documentation require fixing:</p>$DOC_ERROR<p>The following syntax erros require fixing:</p>$DOC_UNSUPPORTED</body></html>" > "${HTML_PATH}/api/report.html"
 echo "Commit API documentation to gh-pages branch"
 # Create and commit the documentation repo.
 cd ${HTML_PATH}
