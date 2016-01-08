@@ -24,6 +24,8 @@ git rm -rf --ignore-unmatch ${HTML_PATH}/api
 # Generate the HTML documentation.
 echo "Starting doxygen..."
 doxygen >doxygen.log 2>error.log
+
+ls
 echo "doxygen complete"
 NOT_DOCED=`grep "is not documented" error.log | wc -l`
 NOT_DOC_MEMBER=`grep "Member.*is not documented" error.log | wc -l`
