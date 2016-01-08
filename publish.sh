@@ -30,8 +30,8 @@ NOT_DOCED=`grep "is not documented" error.log | wc -l`
 NOT_DOC_MEMBER=`grep "Member.*is not documented" error.log | wc -l`
 NOT_DOC_PARAM=`grep "The following parameters of .* are not documented" error.log | wc -l`
 DOC_PARAM=`grep "The following parameters of .* are not documented" error.log | awk --field-separator " of " '{ print $2 }' | awk --field-separator " are not documented" '{ print "<li>"$1"</li>" }'` || DOC_PARAM="None"
-DOC_ERROR=`grep "is not found in the argument list" error.log | awk --field-separator ":" '{ print "<li>"$2"</li>" }'` || DOC_ERROR="None"
-DOC_UNSUPPORTED=`grep "Unsupported xml/html tag" error.log | awk --field-separator ":" '{ print "<li>"$2"</li>" }'` || DOC_UNSUPPORTED="None"
+DOC_ERROR=`grep "is not found in the argument list" error.log | awk --field-separator ":" '{ print "<li>"$4"</li>" }'` || DOC_ERROR="None"
+DOC_UNSUPPORTED=`grep "Unsupported xml/html tag" error.log | awk --field-separator ":" '{ print "<li>"$4"</li>" }'` || DOC_UNSUPPORTED="None"
 echo "Creating report"
 echo "<html><body><p>There are $NOT_DOCED elements not yet documented</p><p>There are $NOT_DOC_MEMBER undocumented member elements.</p><p<The following functions have undocumented parameters:</p><ul>$DOC_PARAM</ul><p>The following errors in documentation require fixing:</p><ul>$DOC_ERROR</ul><p>The following syntax errors require fixing:</p><ul>$DOC_UNSUPPORTED</ul></body></html>" > "${HTML_PATH}/api/report.html"
 echo "Commit API documentation to gh-pages branch"
