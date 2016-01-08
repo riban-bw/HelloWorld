@@ -31,7 +31,7 @@ NOT_DOCED=`grep "is not documented" error.log | wc -l`
 NOT_DOC_MEMBER=`grep "Member.*is not documented" error.log | wc -l`
 NOT_DOC_PARAM=`grep "The following parameters of .* are not documented" error.log | wc -l`
 DOC_PARAM=`grep "The following parameters of .* are not documented" error.log | awk -F" of " '{ print $2 }' | awk -F" are not documented" '{ print "<li>"$1"</li>" }'` || DOC_PARAM="None"
-DOC_ERROR=`grep "is not found in the argument list" error.log | sed "s|$BUILD_PATH/||" | awk -F":" '{ printf "<li>%s in file <b>%s</b> (line %s)</li>\n", $4, $1, $2 }'` || DOC_ERROR="None"
+DOC_ERROR=`grep "is not found in the argument list" error.log | sed "s|$BUILD_PATH/||" | sed 's/</\&lt\;/g' | sed 's/>/\&gt\;/g' | sed 's/^/<li>/' | sed 's/$/<\/li>/'` || DOC_ERROR="None"
 DOC_UNSUPPORTED=`grep "Unsupported xml/html tag" error.log | sed "s|$BUILD_PATH/||" | sed 's/</\&lt\;/g' | sed 's/>/\&gt\;/g' | sed 's/^/<li>/' | sed 's/$/<\/li>/'` || DOC_UNSUPPORTED="None"
 echo "Creating report"
 echo "<html><body><p>There are $NOT_DOCED undocumented elements of which $NOT_DOC_MEMBER are class (or group) member elements.</p><p>The following functions parameters are undocumented:</p><ul>$DOC_PARAM</ul><p>The following errors in documentation require fixing:</p><ul>$DOC_ERROR</ul><p>The following syntax errors require fixing:</p><ul>$DOC_UNSUPPORTED</ul></body></html>" > "${HTML_PATH}/api/report.html"
