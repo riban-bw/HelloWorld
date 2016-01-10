@@ -1,11 +1,15 @@
 #!/bin/bash -e
 # Passing '-e' parameter to bash to exit script immediately if any command fails
 
-# Only run on first Travis-ci job to avoid running for each platform / version
-if [ "${TRAVIS_JOB_NUMBER: -1}" != "1" ]
+# Only run on first Travis-CI job to avoid running for each platform / version. Only run for core repository to avoid failure due to wrong encryption keys.
+if [ "${TRAVIS_JOB_NUMBER: -1}" != "1" -o $TRAVIS_REPO_SLUG != "riban-bw/helloWorld"
 then
   exit 0
 fi
+
+# Decrypt ssh key
+openssl aes-256-cbc -K $encrypted_3b52e9352b1f_key -iv $encrypted_3b52e9352b1f_iv -in travisci_rsa.enc -out  ~/.ssh/id_rsa -d
+chmod 0600  ~/.ssh/id_rsa
 
 # Settings
 REPO_PATH=git@github.com:riban-bw/HelloWorld.git

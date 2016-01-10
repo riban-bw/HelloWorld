@@ -3,8 +3,6 @@ language: c
 os:
 - linux
 env: 
-  global:
-  - CORE_REPO=0
   matrix:
   - VERSION=1
 addons:
@@ -14,7 +12,6 @@ addons:
     packages:
     - bsdtar
     - doxygen
-install: 
 script:
 - make hello
 after_success: 
