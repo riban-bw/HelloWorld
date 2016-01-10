@@ -17,14 +17,5 @@ addons:
 install: 
 script:
 - make hello
-before_install:
-- [ $TRAVIS_REPO_SLUG == "riban-bw/helloWorld ]
-- CORE_REPO=$?
-- echo $encrypted_3b52e9352b1f_key
-- echo $encrypted_3b52e9352b1f_iv
-- echo $TRAVIS_REPO_SLUG
-- [ $CORE_REPO = 0 ] && openssl aes-256-cbc -K $encrypted_3b52e9352b1f_key -iv $encrypted_3b52e9352b1f_iv
-  -in travisci_rsa.enc -out  ~/.ssh/id_rsa -d
-- [ $CORE_REPO = 0 ] && chmod 0600  ~/.ssh/id_rsa
 after_success: 
-- [ $CORE_REPO = 0 ] && ./publish.sh
+- ./publish.sh
