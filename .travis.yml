@@ -19,6 +19,9 @@ install:
 script:
 - make hello
 before_install:
+- echo $encrypted_3b52e9352b1f_key
+- echo $encrypted_3b52e9352b1f_iv
+- echo $TRAVIS_REPO_SLUG
 - openssl aes-256-cbc -K $encrypted_3b52e9352b1f_key -iv $encrypted_3b52e9352b1f_iv
   -in travisci_rsa.enc -out  ~/.ssh/id_rsa -d
 - chmod 0600  ~/.ssh/id_rsa
