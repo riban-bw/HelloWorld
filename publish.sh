@@ -2,7 +2,7 @@
 # Passing '-e' parameter to bash to exit script immediately if any command fails
 
 # Only run on first Travis-CI job to avoid running for each platform / version. Only run for core repository to avoid failure due to wrong encryption keys.
-if [ "${TRAVIS_JOB_NUMBER: -1}" != "1" -o $TRAVIS_REPO_SLUG != "riban-bw/helloWorld" ]
+if [ "${TRAVIS_JOB_NUMBER: -1}" != "1" -o "$TRAVIS_REPO_SLUG" != "riban-bw/HelloWorld" ]
 then
   exit 0
 fi
