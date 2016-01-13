@@ -2,7 +2,7 @@
 
 
 /**	@defgroup fn Functions and stuff
-*	Hello
+*	Hello there
 *	@{
 */
 
