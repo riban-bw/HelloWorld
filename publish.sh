@@ -9,7 +9,8 @@ then
 fi
 
 # Decrypt ssh key
-openssl aes-256-cbc -K $encrypted_3b52e9352b1f_key -iv $encrypted_3b52e9352b1f_iv -in travisci_rsa.enc -out  ~/.ssh/id_rsa -d
+openssl aes-256-cbc -K "$sshkey" -iv $encrypted_3b52e9352b1f_iv -in travisci_rsa.enc -out  ~/.ssh/id_rsa -d
+# openssl aes-256-cbc -K $encrypted_3b52e9352b1f_key -iv $encrypted_3b52e9352b1f_iv -in travisci_rsa.enc -out  ~/.ssh/id_rsa -d
 chmod 0600  ~/.ssh/id_rsa
 
 # Settings
