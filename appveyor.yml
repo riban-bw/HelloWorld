@@ -1,6 +1,11 @@
 os: Windows Server 2012 R2
 init: 
   - git config --global core.autocrlf input
+
+environment:
+  matrix:
+    - build_compiler: "mingw"
+    - build_compiler: "cygwin"
     
 platform:
   - x86
