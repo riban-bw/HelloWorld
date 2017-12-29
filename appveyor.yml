@@ -14,7 +14,7 @@ environment:
 install:
   
 build_script:
-  - cd GAPPVEYOR_BUILD_FOLDER
+  - cd %APPVEYOR_BUILD_FOLDER%
   - gcc -v
   - echo "Here I am"
   - uname -a
