@@ -5,7 +5,9 @@ init:
 environment:
   matrix:
     - build_compiler: "mingw"
+      PATH: C:\MinGW\msys\1.0\bin;C:\MinGW\bin;%PATH%  
     - build_compiler: "cygwin"
+      PATH: C:\cygwin\bin;%PATH%  
     
 platform:
   - x86
