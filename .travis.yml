@@ -2,4 +2,4 @@ language: bash
 os:
 - osx
 script:
-- echo /Users/travis/.rvm/scripts/functions/support
+- cat /Users/travis/.rvm/scripts/functions/support
