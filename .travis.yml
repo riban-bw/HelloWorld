@@ -1,18 +1,5 @@
-sudo: false
-language: c
+language: bash
 os:
-- linux
-env: 
-  matrix:
-  - VERSION=1
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - bsdtar
-    - doxygen
+- osx
 script:
-- make hello
-after_success: 
-- ./publish.sh
+- echo /Users/travis/.rvm/scripts/functions/support
