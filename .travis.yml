@@ -4,14 +4,19 @@ os:
 env:
   - ARCH=x86_64
   - ARCH=i686
+
+notifications:
+  email: false
+
 script:
   - echo "Hello world!"
   - uname -a
   - 'if [ "$ARCH" = "x86_64" ]; then
     echo "64 bit";
 	./hello.sh;
-    elif [ "$ARCH" = "i686" ]; then
+    fi'
+  - 'if [ "$ARCH" = "i686" ]; then
 	echo "32 bit";
-	docker run -i -v "${PWD}:/MyProgram" i386/ubuntu:16.04 /bin/bash -c "linux32 --32bit i386 /MyProgram/hello.sh";
-	fi'
+	docker run -i -v "${PWD}:/MyProgram" i386/ubuntu:16.04 /bin/bash -c "linux32 --32bit i386 sudo apt install wget; /MyProgram/hello.sh";
+    fi'
 
