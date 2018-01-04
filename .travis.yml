@@ -17,6 +17,6 @@ script:
     fi'
   - 'if [ "$ARCH" = "i686" ]; then
       echo "32 bit";
-      docker run -i -v "${PWD}:/MyProgram" i386/ubuntu:16.04 /bin/bash -c "pwd; sudo ls; sudo apt-get install wget; /MyProgram/hello.sh";
+      docker run -i -v "${PWD}:/MyProgram" i386/ubuntu:16.04 /bin/bash -c "apt install wget; /MyProgram/hello.sh";
     fi'
 
