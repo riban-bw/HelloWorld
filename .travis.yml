@@ -8,9 +8,9 @@ script:
   - echo "Hello world!"
   - 'if [ "$ARCH" = "x86_64" ]; then
     echo "64 bit";
-	./hello.sh
+	./hello.sh;
     elif [ "$ARCH" = "i686" ]; then
 	echo "32 bit";
-	docker run -i -v "${PWD}:/MyProgram" i386/ubuntu:16.04 /bin/bash -c "linux32 --32bit i386 /MyProgram/hello.sh"
+	docker run -i -v "${PWD}:/MyProgram" i386/ubuntu:16.04 /bin/bash -c "linux32 --32bit i386 /MyProgram/hello.sh";
 	fi'
 
