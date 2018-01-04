@@ -1,6 +1,7 @@
 language: bash
 os:
 - linux
+- linux
 script:
-- "docker run -i -v \"${PWD}:/MyProgram\" toopher/centos-i386:centos6 /bin/bash -c \"linux32 --32bit i386 ls /MyProgram\""
+- echo "Hello world!"
 

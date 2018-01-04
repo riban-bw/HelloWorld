@@ -2,6 +2,7 @@ Hello World
 ***********
 
 [![Build1][1-badge]][1-link]
+
 [1-badge]: https://travis-matrix-badges.herokuapp.com/repos/riban-bw/HelloWorld/branches/master/1
 [1-link]: https://travis-ci.org/riban-bw/HelloWorld
 
