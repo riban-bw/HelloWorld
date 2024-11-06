@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-
 /**	@defgroup fn Functions and stuff
 *	Hello there
 *	@{
